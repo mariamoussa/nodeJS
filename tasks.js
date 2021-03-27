@@ -45,6 +45,8 @@ function onDataReceived(text) {
   }
   else if (text.trim() === 'help') {
     listCommands();
+  }else if(text.trim() === 'list'){
+    list();
   }
   else {
     unknownCommand(text);
@@ -98,6 +100,14 @@ function listCommands() {
   console.log('1- hello: You can add a person name after hello so you greet them');
   console.log('2- quit');
   console.log('3- exit');
+}
+
+var tasks = ["t1", "t2"];
+
+function list() {
+  for (var i = 0; i < tasks.length; i++) {
+    console.log(i + 1 + " - " + tasks[i]);
+  }
 }
 
 // The following line starts the application
