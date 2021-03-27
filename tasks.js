@@ -95,7 +95,7 @@ function quit() {
  * @returns {void}
  */
 function listCommands() {
-  console.log('1- hello');
+  console.log('1- hello: You can add a person name after hello so you greet them');
   console.log('2- quit');
   console.log('3- exit');
 }
