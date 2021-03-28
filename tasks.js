@@ -43,10 +43,13 @@ function onDataReceived(text) {
   else if (t[0] === 'hello') {
     hello(t[1]);
   }
-  else if (text.trim() === 'help') {
+  else if (t[0].trim() === 'help') {
     listCommands();
-  }else if(text.trim() === 'list'){
+  }else if(t[0].trim() === 'list'){
     list();
+  }else if (t[0] === "add") {
+    t.shift();
+    add(t.join(" "));
   }
   else {
     unknownCommand(text);
@@ -107,6 +110,18 @@ var tasks = ["t1", "t2"];
 function list() {
   for (var i = 0; i < tasks.length; i++) {
     console.log(i + 1 + " - " + tasks[i]);
+  }
+}
+
+function add(task) {
+
+  if (task === '') {
+    console.log("Task undefined");
+  } else {
+    tasks.push(task);
+    for (var i = 0; i < tasks.length; i++) {
+      console.log(i + 1 + " - " + tasks[i]);
+    }
   }
 }
 
