@@ -133,7 +133,7 @@ function add(task) {
 
 function remove(text) {
   if (text < 1 || text > tasks.length) {
-    console.log("Task not found, select a proper task number:")
+    console.log("Task not found, the task number you entered doesn't exist!")
   }
 
   if (text) {
