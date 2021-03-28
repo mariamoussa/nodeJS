@@ -50,6 +50,8 @@ function onDataReceived(text) {
   }else if (t[0] === "add") {
     t.shift();
     add(t.join(" "));
+  }else if (t[0] === "remove") {
+    remove(t[1]);
   }
   else {
     unknownCommand(text);
@@ -122,6 +124,23 @@ function add(task) {
     for (var i = 0; i < tasks.length; i++) {
       console.log(i + 1 + " - " + tasks[i]);
     }
+  }
+}
+
+function remove(text) {
+  if (text < 1 || text > tasks.length) {
+    console.log("Task not found, select a proper task number:")
+  }
+
+  if (text) {
+    tasks.splice(text - 1, 1)
+  }
+  else {
+    tasks.splice(tasks.length - 1, 1)
+  }
+
+  for (var j = 0; j < tasks.length; j++) {
+    console.log(j + 1 + " - " + tasks[j]);
   }
 }
 
