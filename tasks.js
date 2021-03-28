@@ -105,6 +105,10 @@ function listCommands() {
   console.log('1- hello: You can add a person name after hello so you greet them');
   console.log('2- quit');
   console.log('3- exit');
+  console.log('4- list: It list all the available commands');
+  console.log('5- add: It adds a task');
+  console.log('6- remove: It removes a task');
+
 }
 
 var tasks = ["t1", "t2"];
