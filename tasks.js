@@ -42,7 +42,7 @@ function onDataReceived(text) {
   } else if (t[0] === 'hello') {
     hello(t[1]);
   } else if (t[0].trim() === 'help') {
-    listCommands();
+    help();
   } else if (t[0].trim() === 'list') {
     displaytask(tasks);
   } else if (t[0] === "add") {
@@ -110,14 +110,15 @@ function quit() {
  *
  * @returns {void}
  */
-function listCommands() {
+function help() {
   console.log('1- hello: You can add a person name after hello so you greet them');
   console.log('2- quit');
   console.log('3- exit');
   console.log('4- list: It list all the available commands');
   console.log('5- add: It adds a task');
   console.log('6- remove: It removes a task');
-
+  console.log('7- check N: Check a task by adding its number(ex: check 1, checks the task 1)');
+  console.log('8- uncheck N: uncheck a task by adding its number(ex: uncheck 1, unchecks the task 1)');
 }
 
 var tasks = [
@@ -125,11 +126,11 @@ var tasks = [
   { name: "t2", done: false }
 ];
 
-function list() {
-  for (var i = 0; i < tasks.length; i++) {
-    console.log(i + 1 + " - " + tasks[i]);
-  }
-}
+// function list() {
+//   for (var i = 0; i < tasks.length; i++) {
+//     console.log(i + 1 + " - " + tasks[i]);
+//   }
+// }
 
 function add(task) {
   if (task === '') {
