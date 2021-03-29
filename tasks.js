@@ -121,8 +121,8 @@ function listCommands() {
 }
 
 var tasks = [
-  { name: "t1", checked: true },
-  { name: "t2", checked: false }
+  { name: "t1", done: true },
+  { name: "t2", done: false }
 ];
 
 function list() {
@@ -174,16 +174,16 @@ function edit(text, editText) {
 }
 
 function check(tasks, i) {
-    tasks[i - 1].checked = true;
+    tasks[i - 1].done = true;
 }
 
 function uncheck(tasks, i) {
-  tasks[i - 1].checked = false;
+  tasks[i - 1].done = false;
 }
 
 function displaytask(tasks) {
   for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].checked === true) {
+    if (tasks[i].done === true) {
       console.log("[✓] " + tasks[i].name);
     } else {
       console.log("[ ] " + tasks[i].name);
