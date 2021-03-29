@@ -39,23 +39,30 @@ function onDataReceived(text) {
   t = t.split(" ");
   if (t[0] === 'quit' || t[0] === 'exit') {
     quit();
-  }
-  else if (t[0] === 'hello') {
+  } else if (t[0] === 'hello') {
     hello(t[1]);
-  }
-  else if (t[0].trim() === 'help') {
+  } else if (t[0].trim() === 'help') {
     listCommands();
-  }else if(t[0].trim() === 'list'){
-    list();
-  }else if (t[0] === "add") {
+  } else if (t[0].trim() === 'list') {
+    displaytask(tasks);
+  } else if (t[0] === "add") {
     t.shift();
     add(t.join(" "));
-  }else if (t[0] === "remove") {
+  } else if (t[0] === "remove") {
     remove(t[1]);
-  }else if (t[0] === "edit") {
+  } else if (t[0] === "edit") {
     edit(t.slice(1, 2).join(' '), t.slice(2).join(' '));
-  }
-  else {
+  } else if (t[0] === "check" && t[1]===null) {
+    console.log("error please enter a number to check");
+  } else if (t[0] === "check" && t[1] != null) {
+    check(tasks, t[1]);
+    displaytask(tasks);
+  } else if (t[0] === "uncheck" && t[1]===null) {
+    console.log("error please enter a number to check");
+  } else if (t[0] === "uncheck" && t[1] != null) {
+    uncheck(tasks, t[1]);
+    displaytask(tasks);
+  }else {
     unknownCommand(text);
   }
 }
@@ -81,9 +88,9 @@ function unknownCommand(c) {
  */
 function hello(x) {
   if (x) {
-    console.log('hello ' + x+ '!');
-  } else { 
-    console.log('hello!'); 
+    console.log('hello ' + x + '!');
+  } else {
+    console.log('hello!');
   }
 }
 
@@ -113,7 +120,10 @@ function listCommands() {
 
 }
 
-var tasks = ["t1", "t2"];
+var tasks = [
+  { name: "t1", checked: true },
+  { name: "t2", checked: false }
+];
 
 function list() {
   for (var i = 0; i < tasks.length; i++) {
@@ -122,7 +132,6 @@ function list() {
 }
 
 function add(task) {
-
   if (task === '') {
     console.log("Task undefined");
   } else {
@@ -153,14 +162,32 @@ function remove(text) {
 function edit(text, editText) {
   if (text === '' && editText === '') {
     console.log("please enter a task number:")
-  }else if (isNaN(text)) {
+  } else if (isNaN(text)) {
     tasks[tasks.length - 1] = text + ' ' + editText
-  }else {
+  } else {
     tasks[text - 1] = editText;
   }
 
   for (var k = 0; k < tasks.length; k++) {
     console.log(k + 1 + " - " + tasks[k]);
+  }
+}
+
+function check(tasks, i) {
+    tasks[i - 1].checked = true;
+}
+
+function uncheck(tasks, i) {
+  tasks[i - 1].checked = false;
+}
+
+function displaytask(tasks) {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].checked === true) {
+      console.log("[✓] " + tasks[i].name);
+    } else {
+      console.log("[ ] " + tasks[i].name);
+    }
   }
 }
 
