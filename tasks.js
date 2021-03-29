@@ -17,6 +17,7 @@ function startApp(name) {
   console.log("--------------------")
 }
 
+const fs = require("fs");
 
 /**
  * Decides what to do depending on the data that was received
@@ -62,6 +63,9 @@ function onDataReceived(text) {
   } else if (t[0] === "uncheck" && t[1] != null) {
     uncheck(tasks, t[1]);
     displaytask(tasks);
+  }else if (t[0] === "node" && t[1] === "tasks.js" && t[2] === null) {
+    save();
+    load();
   }else {
     unknownCommand(text);
   }
@@ -190,6 +194,25 @@ function displaytask(tasks) {
       console.log("[ ] " + tasks[i].name);
     }
   }
+}
+
+function save() {
+  var jsondata = JSON.stringify(tasks);
+  try {
+    fs.writeFileSync("database.json", jsondata);
+    console.log("JSON data is saved.");
+  } catch (error) {
+    console.error(err);
+  }
+}
+
+function load() {
+  fs.readFile("database.json", "utf-8", (err, data) => {
+    if (err) {
+      throw err;
+    }
+    tasks = JSON.parse(data.toString());
+  });
 }
 
 // The following line starts the application
